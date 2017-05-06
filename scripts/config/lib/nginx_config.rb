@@ -10,6 +10,9 @@ class NginxConfig
     https_only: false,
     worker_connections: 512,
     resolver: "8.8.8.8",
+    gzip_static: "on",
+    brotli: "off",
+    brotli_static: "off",
     logging: {
       "access" => true,
       "error" => "error"
@@ -23,6 +26,9 @@ class NginxConfig
     json["port"] ||= ENV["PORT"] || 5000
     json["root"] ||= DEFAULT[:root]
     json["encoding"] ||= DEFAULT[:encoding]
+    json["gzip_static"] ||= DEFAULT[:gzip_static]
+    json["brotli"] ||= DEFAULT[:brotli]
+    json["brotli_static"] ||= DEFAULT[:brotli_static]
 
     index = 0
     json["proxies"] ||= {}

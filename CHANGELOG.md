@@ -1,3 +1,12 @@
+## v4 (5/6/2017)
+* NGINX updated to `1.12.0`
+* ngx_mruby updated to `1.19.4`
+* Enable `gzip_static` module
+* Enable `ngx_brotli` module
+* Add `gzip_static` directive
+* Add `brotli` directive
+* Add `brotli_static` directive
+
 ## v3 (3/30/2017)
 * [#32](https://github.com/heroku/heroku-buildpack-static/pull/32) proxies set ssl server name extension for SNI
 * [#37](https://github.com/heroku/heroku-buildpack-static/pull/47) fallback proxies set ssl server name extension for SNI

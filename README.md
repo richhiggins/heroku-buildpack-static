@@ -66,6 +66,33 @@ You can disable the access log and change the severity level for the error log.
 }
 ```
 
+#### GZip static
+You can disable (or enable) usage of `gzip_static` module (enabled by default).
+
+```json
+{
+  "gzip_static": "off"
+}
+```
+
+#### Brotli compression
+You can enable usage of Brotli compression with `ngx_brotli` module (disabled by default).
+
+```json
+{
+  "brotli": "on"
+}
+```
+
+#### Brotli static
+Enables or disables checking of the existence of pre-compressed files with `.br` extension. With the `always` value, pre-compressed file is used in all cases, without checking if the client supports it.
+
+```json
+{
+  "brotli_static": "on"
+}
+```
+
 By default `access` is set to `true` and `error` is set to `error`.
 
 The environment variable `STATIC_DEBUG` can be set, to override the `error` log level to `error`.

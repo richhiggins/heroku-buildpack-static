@@ -4,6 +4,7 @@ require_relative 'nginx_config_util'
 
 class NginxConfig
   DEFAULT = {
+    dynamic_modules: [],
     worker_processes: "auto",
     root: "public_html/",
     encoding: "UTF-8",
@@ -23,6 +24,7 @@ class NginxConfig
   def initialize(json_file)
     json = {}
     json = JSON.parse(File.read(json_file)) if File.exist?(json_file)
+    json["dynamic_modules"] ||= DEFAULT[:dynamic_modules]
     json["worker_processes"] ||= DEFAULT[:worker_processes]
     json["worker_connections"] ||= ENV["WORKER_CONNECTIONS"] || DEFAULT[:worker_connections]
     json["port"] ||= ENV["PORT"] || 5000

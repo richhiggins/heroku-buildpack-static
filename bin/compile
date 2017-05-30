@@ -12,7 +12,7 @@ fetch_nginx_tarball() {
     local version="1.12.0"
     local tarball_file="nginx-$version.tgz"
     local stack="cedar-14"
-    local nginx_tarball_url="https://s3-eu-west-1.amazonaws.com/evlms-heroku-buildpack-ruby/nginx/$stack/nginx-$version-ngx_mruby.tgz"
+    local nginx_tarball_url="https://s3-eu-west-1.amazonaws.com/evlms-heroku-buildpack-ruby/nginx/$stack/nginx-$version-ngx_mruby_brotli.tgz"
     local dest_path="$cache_dir/$stack/$tarball_file"
 
     if [ -f "$dest_path" ]; then

@@ -75,6 +75,15 @@ You can disable (or enable) usage of `gzip_static` module (enabled by default).
 }
 ```
 
+#### Dynamic Modules
+You can enable dynamic modules, added in compilation
+
+```json
+{
+  "dynamic_modules": ["brotli_filter", "brotli_static"]
+}
+```
+
 #### Brotli compression
 You can enable usage of Brotli compression with `ngx_brotli` module (disabled by default).
 

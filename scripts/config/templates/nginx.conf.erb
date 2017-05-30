@@ -1,6 +1,12 @@
 daemon off;
 worker_processes <%= worker_processes %>;
 
+<% unless dynamic_modules.empty? %>
+<% dynamic_modules.each do |dm| %>
+load_module /app/bin/ngx_http_<%= dm %>_module.so;
+<% end %>
+<% end %>
+
 events {
   use epoll;
   accept_mutex on;
@@ -44,8 +50,12 @@ http {
     keepalive_timeout 5;
     root <%= root %>;
     gzip_static <%= gzip_static %>;
+    <% if dynamic_modules.include? 'brotli_filter' %>
     brotli <%= brotli %>;
+    <% end %>
+    <% if dynamic_modules.include? 'brotli_static' %>
     brotli_static <%= brotli_static %>;
+    <% end %>
 
   <% if error_page %>
     error_page 404 500 /<%= error_page %>;

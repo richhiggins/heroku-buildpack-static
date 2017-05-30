@@ -295,3 +295,40 @@ You need to forward the docker's port 3000 to the virtual machine's port though.
 ```
 VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port3000,tcp,,3000,,3000";
 ```
+
+## Building NGINX
+
+### Installing prerequisites
+
+```sh
+apt-get -y install libpcre3-dev libssl-dev openssl bison
+```
+
+### Getting the source
+
+```sh
+export NGINX_VERSION=1.12.0
+wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
+tar xvf nginx-${NGINX_VERSION}.tar.gz
+git clone https://github.com/matsumotory/ngx_mruby.git
+git clone https://github.com/google/ngx_brotli.git
+```
+
+### Building
+
+```sh
+cd ngx_mruby
+./configure --with-ngx-src-root=../nginx-${NGINX_VERSION}
+make build_mruby
+make generate_gems_config
+cd ../nginx-${NGINX_VERSION}
+./configure --prefix=/tmp/workspace/build --with-http_gzip_static_module --with-http_ssl_module --add-module=../ngx_mruby --add-module=../ngx_mruby/dependence/ngx_devel_kit --add-dynamic-module=../ngx_brotli
+make
+```
+
+### Generating tarball
+
+```sh
+cd objs
+tar cvzf nginx-${NGINX_VERSION}-ngx_mruby_brotli.tgz nginx ngx_http_brotli_filter_module.so ngx_http_brotli_static_module.so
+```

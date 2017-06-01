@@ -309,14 +309,17 @@ VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port3000,tcp,,3000,,3000";
 
 ### Installing prerequisites
 
+**Attention** build it only in Ubuntu Trusty environment because of [Cedar14](https://devcenter.heroku.com/articles/cedar-14-stack)!
+
 ```sh
-apt-get -y install libpcre3-dev libssl-dev openssl bison
+apt-get -y install libpcre3-dev libssl-dev openssl bison ruby rake
 ```
 
 ### Getting the source
 
 ```sh
 export NGINX_VERSION=1.12.0
+export MRUBY_VERSION=1.19.4
 wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 tar xvf nginx-${NGINX_VERSION}.tar.gz
 git clone https://github.com/matsumotory/ngx_mruby.git
@@ -327,6 +330,7 @@ git clone https://github.com/google/ngx_brotli.git
 
 ```sh
 cd ngx_mruby
+git checkout -b building v${MRUBY_VERSION}
 ./configure --with-ngx-src-root=../nginx-${NGINX_VERSION}
 make build_mruby
 make generate_gems_config

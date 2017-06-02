@@ -1,5 +1,29 @@
-# ghetto require, since mruby doesn't have require
-eval(File.read('/app/bin/config/lib/nginx_config_util.rb'))
+module Utils
+  def self.match_proxies(proxies, uri)
+    return false unless proxies
+
+    matched = proxies.select do |proxy|
+      Regexp.compile("^#{proxy}") =~ uri
+    end
+
+    # return the longest matched proxy
+    if matched.any?
+      matched.max_by {|proxy| proxy.size }
+    else
+      false
+    end
+  end
+
+  def self.match_redirects(redirects, uri)
+    return false unless redirects
+
+    redirects.each do |redirect|
+      return redirect if redirect == uri
+    end
+
+    false
+  end
+end
 
 USER_CONFIG = "/app/static.json"
 
@@ -10,9 +34,9 @@ uri       = req.var.uri
 proxies   = config["proxies"] || {}
 redirects = config["redirects"] || {}
 
-if proxy = NginxConfigUtil.match_proxies(proxies.keys, uri)
+if proxy = Utils.match_proxies(proxies.keys, uri)
   "@#{proxy}"
-elsif redirect = NginxConfigUtil.match_redirects(redirects.keys, uri)
+elsif redirect = Utils.match_redirects(redirects.keys, uri)
   "@#{redirect}"
 else
   "@404"

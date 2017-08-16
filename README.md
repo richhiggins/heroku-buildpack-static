@@ -318,8 +318,8 @@ apt-get -y install build-essential libpcre3-dev libssl-dev openssl bison ruby ra
 ### Getting the source
 
 ```sh
-export NGINX_VERSION=1.13.3
-export MRUBY_VERSION=1.19.5
+export NGINX_VERSION=1.13.4
+export MRUBY_VERSION=1.20.0
 wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 tar xvf nginx-${NGINX_VERSION}.tar.gz
 git clone https://github.com/matsumotory/ngx_mruby.git

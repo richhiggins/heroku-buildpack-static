@@ -1,3 +1,8 @@
+## v5 (16/8/2017)
+* NGINX updated to `1.13.4`
+* ngx_mruby updated to `1.20.0`
+* Get rid off ghetto require by @palkan
+
 ## v4 (5/6/2017)
 * NGINX updated to `1.12.0`
 * ngx_mruby updated to `1.19.4`

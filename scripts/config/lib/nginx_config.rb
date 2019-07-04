@@ -13,7 +13,7 @@ class NginxConfig
     worker_connections: 512,
     resolver: "8.8.8.8",
     gzip_static: "on",
-    brotli: "off",
+    brotli: "on",
     brotli_static: "off",
     logging: {
       "access" => true,
